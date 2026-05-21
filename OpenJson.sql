@@ -22,10 +22,6 @@ declare @json NVARCHAR(Max) = '
     }
 '
 
---select json_value(@json, '$.ShipInfo.Location.City')
-
-declare @json NVARCHAR(Max) = (select * from openrowset(BULK 'c:\backups\orders.json', SINGLE_NCLOB) as import)
-
 select * from openjson(@json) with (
 	Id int,
 	Customer nvarchar(15),
@@ -36,3 +32,6 @@ select * from openjson(@json) with (
 	ShipInfo nvarchar(max) as json
 )
 
+--select json_value(@json, '$.ShipInfo.Location.City')
+
+--declare @json NVARCHAR(Max) = (select * from openrowset(BULK 'c:\backups\orders.json', SINGLE_NCLOB) as import)
